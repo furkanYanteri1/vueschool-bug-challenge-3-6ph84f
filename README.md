@@ -11,3 +11,6 @@ The issue with the app is that it fails to update the time dynamically; instead,
 ## The Mission:
 
 Your mission is to levarage Vue's reactivity system to ensure the clock dynamically updates without requiring a manual page refresh.
+
+## How to run:
+npm install && npm run dev
