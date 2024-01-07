@@ -9,7 +9,21 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { ref, computed, watch, onMounted } from 'vue';
+
+const refreshVar = ref(0);
+const interval = 1000; // interval in milliseconds
+
+const refresh = () => {
+  refreshVar.value = refreshVar.value % 2 === 0 ? 0 : 1;
+};
+
+watch(refreshVar, refresh, { immediate: true });
+
+onMounted(() => {
+  // Set up an interval to increase the variable
+  setInterval(refresh, interval);
+});
 
 const formattedTime = computed(() => {
   const now = Date.now();
@@ -18,7 +32,7 @@ const formattedTime = computed(() => {
   const minutes = date.getMinutes().toString().padStart(2, '0');
   const seconds = date.getSeconds().toString().padStart(2, '0');
   const formattedTime = `${hours}:${minutes}:${seconds}`;
-
+  refreshVar.value += 10; // Adjust this based on your actual computation
   return formattedTime;
 });
 </script>
